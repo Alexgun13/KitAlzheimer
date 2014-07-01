@@ -19,7 +19,7 @@ import javax.swing.Box;
 import javax.swing.JMenuBar;
 
 public class Config_basico extends JPanel {
-	
+	//funciona
 	private JPanel contentPane;
 	private JTextField valACAmp;
 	private JTextField valDCAmp;
