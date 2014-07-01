@@ -30,7 +30,7 @@ public class Config_basico extends JPanel {
 	private Component horizontalStrut;
 
 	/**
-	 * Create the panel.lla
+	 * Create the panel
 	 */
 	public Config_basico() {
 		setLayout(null);
