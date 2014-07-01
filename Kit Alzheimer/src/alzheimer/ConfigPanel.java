@@ -20,7 +20,7 @@ public class ConfigPanel extends JFrame {
 	public static Config_basico basico;
 
 	/**
-	 * Launch the application. yeah
+	 * Launch the application. yea
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
