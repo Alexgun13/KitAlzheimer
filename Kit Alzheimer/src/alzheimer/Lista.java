@@ -14,8 +14,7 @@ public class Lista extends JPanel {
 	 * Create the panel.
 	 */
 	public Lista() {
-		setLayout(new BorderLayout(0, 0));
-		
+		setLayout(new BorderLayout(0, 0));		
 		JList list = new JList();
 		list.setModel(new AbstractListModel() {
 			String[] values = new String[] {"a", "aa", "a", "a", "a", "a", "", "a", "aa", "a", "aa", "a", "a", "a", "aa", "a", "a", "a", "a", "a", "a", "a", "a", "a", "", "a", "a", "a", "a", "a", "a", "aa", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "", "a", "aa", "a", "a", "a", "a", "a", "a", "a", "a", "a", "", "a", "aaa", "a", "a", "", "a", "a", "aa", "a", "", "", "a", "a", "a", "aa", "a", "a", "a", "", "a", "a", "a", "a", "a", "a", "aa", "a", "a", "aa", "", "aa"};
