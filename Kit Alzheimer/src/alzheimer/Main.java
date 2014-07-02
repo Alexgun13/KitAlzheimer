@@ -12,9 +12,27 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
 import java.awt.Font;
+
 import javax.swing.JButton;
+
 import java.awt.Panel;
 import java.awt.Color;
+
+import javax.swing.JCheckBox;
+
+import java.awt.GridLayout;
+
+import net.miginfocom.swing.MigLayout;
+
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.ScrollPane;
+
+import javax.swing.JScrollPane;
+import javax.swing.JScrollBar;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
 
 public class Main extends JFrame {
 
@@ -61,42 +79,56 @@ public class Main extends JFrame {
 			e.printStackTrace();
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 955, 614);
+		setBounds(100, 100, 955, 647);
 		contentPane = new JPanel();
 		contentPane.setToolTipText("hola");
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		config = new Configuracion();
-		JPanel panel = config;
-		panel.setBounds(10, 40, 274, 343);
-		contentPane.add(panel);
-				
 		
 		
 		JLabel lblConfig = new JLabel("Config");
+		lblConfig.setBounds(5, 5, 265, 28);
 		lblConfig.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		lblConfig.setBounds(10, 11, 261, 27);
 		contentPane.add(lblConfig);
 		
-		grafica = new chart("Grafica", tipo);
-		grafic = grafica;
-		grafic.setBounds(483, 40, 398, 267);
-		contentPane.add(grafic);
+		config = new Configuracion();
+		config.setBounds(5, 38, 265, 398);
+		JPanel panel = config;
+		contentPane.add(panel);
 		
 		JButton btnMesure = new JButton("Mesure");
-		btnMesure.setBounds(384, 40, 89, 23);
+		btnMesure.setBounds(275, 38, 67, 23);
 		contentPane.add(btnMesure);
 		
-		Panel panel_1 = new Panel();
-		panel_1.setBackground(Color.BLUE);
-		panel_1.setBounds(304, 70, 169, 238);
-		contentPane.add(panel_1);
+		grafica = new chart("Grafica", tipo);
+		grafica.setBounds(451, 38, 399, 330);
+		grafic = grafica;
+		contentPane.add(grafic);
+		grafica.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(34, 139, 34));
-		panel_2.setBounds(482, 315, 399, 238);
-		contentPane.add(panel_2);
+		JPanel panelList = new JPanel();
+		panelList.setBounds(274, 66, 171, 423);
+		panelList.setBackground(Color.BLUE);
+		contentPane.add(panelList);
+		panelList.setLayout(null);
+		
+		JPanel PanelTable = new JPanel();
+		PanelTable.setBounds(451, 373, 399, 116);
+		PanelTable.setBackground(new Color(34, 139, 34));
+		contentPane.add(PanelTable);
+		
+		JCheckBox chcPlot = new JCheckBox("Plot");
+		chcPlot.setBounds(275, 494, 43, 23);
+		contentPane.add(chcPlot);
+		
+		JCheckBox chcSave = new JCheckBox("Save");
+		chcSave.setBounds(275, 522, 49, 23);
+		contentPane.add(chcSave);
+		
+		JCheckBox chcTable = new JCheckBox("Table");
+		chcTable.setBounds(275, 550, 51, 23);
+		contentPane.add(chcTable);
 	}
 }
