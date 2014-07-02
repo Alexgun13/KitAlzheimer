@@ -16,7 +16,7 @@ public class Configuracion extends JPanel {
 	 */
 	public Configuracion() {
 		
-setLayout(null);
+		setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(5, 5, 261, 213);

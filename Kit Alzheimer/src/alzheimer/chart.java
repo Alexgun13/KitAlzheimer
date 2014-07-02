@@ -8,10 +8,15 @@ import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.LogarithmicAxis;
+import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.editor.ChartEditorFactory;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+
+import javax.swing.BoxLayout;
 
 
 public class chart extends JPanel {
@@ -20,12 +25,17 @@ public class chart extends JPanel {
 	String Titulo;
 	String tx;
 	String ty;
+	final static int Lineal=1;
+	final static int Log =2;
 	
-	public chart (String titulo){
+	public chart (String titulo, int tipo){
 		
 		this.Titulo = Titulo;
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		init();
-		grafica = ChartFactory.createXYLineChart(Titulo, tx, ty, datos, PlotOrientation.VERTICAL, true, true,true);			
+		tipoGrafica(tipo);
+		ChartPanel panel = new ChartPanel(grafica);
+		add(panel);
 	}
 	
 	public void init() {
@@ -33,6 +43,24 @@ public class chart extends JPanel {
         this.setBorder(BorderFactory.createLineBorder(Color.gray));
 
     }
+	
+	public void tipoGrafica(int tipo){
+		switch(tipo){
+		case Lineal:
+			grafica = ChartFactory.createXYLineChart(Titulo, tx, ty, datos, PlotOrientation.VERTICAL, true, true,true);
+			break;
+		case Log:
+			grafica = ChartFactory.createXYLineChart(Titulo, tx, ty, datos, PlotOrientation.VERTICAL, true, true,true);
+			XYPlot ejes = new XYPlot();
+			NumberAxis rango = new LogarithmicAxis(ty);
+			ejes.setRangeAxis(rango);
+			break;
+			
+			
+		}
+		
+		
+	}
 	
 		
 	public static void AgregarGraficas(String id, double[] x, double[] y){
