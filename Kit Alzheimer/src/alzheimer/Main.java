@@ -41,6 +41,7 @@ public class Main extends JFrame {
 	public static chart grafica;
 	private JPanel grafic;
 	private static int tipo=1;
+	public static Lista lista;
 
 	/**
 	 * Launch the application.
@@ -108,11 +109,10 @@ public class Main extends JFrame {
 		contentPane.add(grafic);
 		grafica.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JPanel panelList = new JPanel();
-		panelList.setBounds(274, 66, 171, 423);
-		panelList.setBackground(Color.BLUE);
+		lista = new Lista();
+		JScrollPane panelList = new JScrollPane(lista);
+		panelList.setBounds(274, 64, 167, 425);
 		contentPane.add(panelList);
-		panelList.setLayout(null);
 		
 		JPanel PanelTable = new JPanel();
 		PanelTable.setBounds(451, 373, 399, 116);
@@ -130,5 +130,7 @@ public class Main extends JFrame {
 		JCheckBox chcTable = new JCheckBox("Table");
 		chcTable.setBounds(275, 550, 51, 23);
 		contentPane.add(chcTable);
+		
+		
 	}
 }
