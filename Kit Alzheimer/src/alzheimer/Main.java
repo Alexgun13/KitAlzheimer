@@ -42,7 +42,7 @@ public class Main extends JFrame {
 	private JPanel grafic;
 	private static int tipo=1;
 	public static Lista lista;
-
+	public static Tabla tabla;
 	/**
 	 * Launch the application.
 	 */
@@ -114,9 +114,9 @@ public class Main extends JFrame {
 		panelList.setBounds(274, 64, 167, 425);
 		contentPane.add(panelList);
 		
-		JPanel PanelTable = new JPanel();
-		PanelTable.setBounds(451, 373, 399, 116);
-		PanelTable.setBackground(new Color(34, 139, 34));
+		tabla = new Tabla();
+		JPanel PanelTable = tabla;
+		PanelTable.setBounds(451, 373, 399, 200);
 		contentPane.add(PanelTable);
 		
 		JCheckBox chcPlot = new JCheckBox("Plot");
