@@ -1,5 +1,6 @@
 package alzheimer;
 
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -16,6 +17,8 @@ public class Main extends JFrame {
 
 	private JPanel contentPane;
 	public static Configuracion config;
+	public static chart grafica;
+	private JPanel grafic;
 
 	/**
 	 * Launch the application.
@@ -54,7 +57,7 @@ public class Main extends JFrame {
 			e.printStackTrace();
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 544, 453);
+		setBounds(100, 100, 907, 507);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -71,5 +74,10 @@ public class Main extends JFrame {
 		lblConfig.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		lblConfig.setBounds(10, 11, 261, 27);
 		contentPane.add(lblConfig);
+		
+		grafica = new chart("Grafica");
+		grafic = chart.obtieneGrafica();
+		grafic.setBounds(483, 40, 398, 267);
+		contentPane.add(grafic);
 	}
 }
