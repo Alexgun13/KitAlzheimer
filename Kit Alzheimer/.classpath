@@ -5,5 +5,8 @@
 	<classpathentry kind="lib" path="forms-1.3.0.jar" sourcepath="forms-1.3.0-src.zip"/>
 	<classpathentry kind="lib" path="C:/Users/Alex/Downloads/jfreechart-1.0.17/jfreechart-1.0.17/jfreechart-1.0.17-demo.jar"/>
 	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/IOIOLibPC"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Basic_IOIO_TFT"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/IOIO_DualAD5933_basic_screen_v9"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -3,6 +3,9 @@
 	<name>Kit Alzheimer</name>
 	<comment></comment>
 	<projects>
+		<project>Basic_IOIO_TFT</project>
+		<project>IOIO_DualAD5933_basic_screen_v9</project>
+		<project>IOIOLibPC</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

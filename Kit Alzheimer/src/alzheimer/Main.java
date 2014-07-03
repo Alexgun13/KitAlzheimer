@@ -1,6 +1,5 @@
 package alzheimer;
 
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -34,15 +33,28 @@ import javax.swing.JScrollBar;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JProgressBar;
+
 public class Main extends JFrame {
 
 	private JPanel contentPane;
 	public static Configuracion config;
 	public static chart grafica;
 	private JPanel grafic;
+	public static double[] datosx= new double [20];
+	public static double[] datosy=new double[20];
+	public static double[] datost = new double [20];
+	static JProgressBar barraPlano;
 	private static int tipo=1;
 	public static Lista lista;
 	public static Tabla tabla;
+	public static int numeroDato = 0;
+	public static double[] datos = new double[20];
+	public static double[] tiempo = new double[20];
+	public static IOIORecibe recibe;
 	/**
 	 * Launch the application.
 	 */
@@ -52,6 +64,8 @@ public class Main extends JFrame {
 				try {
 					Main frame = new Main();
 					frame.setVisible(true);
+					recibe= new IOIORecibe();
+				    recibe.start();;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -82,7 +96,6 @@ public class Main extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 955, 647);
 		contentPane = new JPanel();
-		contentPane.setToolTipText("hola");
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -100,7 +113,14 @@ public class Main extends JFrame {
 		contentPane.add(panel);
 		
 		JButton btnMesure = new JButton("Mesure");
-		btnMesure.setBounds(275, 38, 67, 23);
+		btnMesure.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				IOIORecibe.reinicia = true;
+				numeroDato ++;
+				new Thread(new EjecucionesMedida()).start();
+			}
+		});
+		btnMesure.setBounds(276, 13, 67, 23);
 		contentPane.add(btnMesure);
 		
 		grafica = new chart("Grafica", tipo);
@@ -131,6 +151,35 @@ public class Main extends JFrame {
 		chcTable.setBounds(275, 550, 51, 23);
 		contentPane.add(chcTable);
 		
+
+		barraPlano = new JProgressBar();
+		barraPlano.setForeground(Color.BLUE);
+		barraPlano.setBounds(276, 38, 146, 27);
+		contentPane.add(barraPlano);
+		barraPlano.setMaximum(20);
+		barraPlano.setStringPainted(true);
+		
+		JButton btnEncenderIoio = new JButton("Encender");
+		btnEncenderIoio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				recibe.stop();
+				recibe.start();
+			}
+		});
+		btnEncenderIoio.setBounds(5, 494, 89, 23);
+		contentPane.add(btnEncenderIoio);
+		
+		JButton btnApagar = new JButton("Apagar");
+		btnApagar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				recibe.stop();
+			}
+		});
+		btnApagar.setBounds(5, 522, 89, 23);
+		contentPane.add(btnApagar);
+		
 		
 	}
-}
+
+	
+		}
