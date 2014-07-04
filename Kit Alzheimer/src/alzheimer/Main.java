@@ -140,9 +140,7 @@ public class Main extends JFrame {
 				miTableModel = (DefaultTableModel) table.getModel();
 				Object nuevaFila[]= {Boolean.FALSE, "Dato" + (numeroDato+1)};
 			    miTableModel.addRow(nuevaFila);
-			    
-			    panelCajas.add(table);
-				
+			   
 				scrollPane.setViewportView(panelCajas);
 				
 				new Thread(new EjecucionesMedida()).start();
@@ -222,7 +220,14 @@ public class Main extends JFrame {
 					public Class getColumnClass(int columnIndex) {
 						return columnTypes[columnIndex];
 					}
+					boolean[] columnEditables = new boolean[] {
+							true, false
+						};
+						public boolean isCellEditable(int row, int column) {
+							return columnEditables[column];
+						}
 		    };
+		table.setShowGrid(false);
 		panelCajas.add(table);
 		
 		

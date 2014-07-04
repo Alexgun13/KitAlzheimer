@@ -15,6 +15,8 @@ import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
 
 public class Lista extends JPanel {
 	static JTable table;
@@ -33,7 +35,7 @@ public class Lista extends JPanel {
 				{null, Boolean.FALSE},
 			},
 			new String[] {
-				"New column", "New column"
+				"Hola", "Hola"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
@@ -43,6 +45,8 @@ public class Lista extends JPanel {
 				return columnTypes[columnIndex];
 			}
 		});
+		table_1.setForeground(Color.WHITE);
+		table_1.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		add(table_1);
 	}
 	
