@@ -1,33 +1,50 @@
 package alzheimer;
 
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
+
 import java.awt.BorderLayout;
 import java.awt.List;
+import java.awt.ScrollPane;
+import java.util.ArrayList;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Lista extends JPanel {
-
+	static JTable table;
+	public static DefaultTableModel modelo;
+	static JTable table_1;
 	/**
 	 * Create the panel.
 	 */
 	public Lista() {
-		setLayout(new BorderLayout(0, 0));		
-		JList list = new JList();
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"a", "aa", "a", "a", "a", "a", "", "a", "aa", "a", "aa", "a", "a", "a", "aa", "a", "a", "a", "a", "a", "a", "a", "a", "a", "", "a", "a", "a", "a", "a", "a", "aa", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "", "a", "aa", "a", "a", "a", "a", "a", "a", "a", "a", "a", "", "a", "aaa", "a", "a", "", "a", "a", "aa", "a", "", "", "a", "a", "a", "aa", "a", "a", "a", "", "a", "a", "a", "a", "a", "a", "aa", "a", "a", "aa", "", "aa"};
-			public int getSize() {
-				return values.length;
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		
+		DefaultTableModel modelo = new DefaultTableModel();
+		// Cantidad de columnas de la tabla
+		table_1 = new JTable(new DefaultTableModel(
+			new Object[][] {
+				{null, Boolean.FALSE},
+			},
+			new String[] {
+				"New column", "New column"
 			}
-			public Object getElementAt(int index) {
-				return values[index];
+		) {
+			Class[] columnTypes = new Class[] {
+				Object.class, Boolean.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
 			}
 		});
-		add(list, BorderLayout.CENTER);
-		
-		
+		add(table_1);
 	}
-
+	
+	
 }

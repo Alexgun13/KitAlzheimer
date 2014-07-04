@@ -2,6 +2,8 @@ package alzheimer;
 
 import java.awt.Color;
 
+import javax.swing.event.ListDataEvent;
+
 public class EjecucionesMedida implements Runnable{
 
 	public void run(){// run a loop to demonstrate raising
@@ -37,6 +39,11 @@ public class EjecucionesMedida implements Runnable{
 		Main.grafica.crearGrafica("datosx",  Main.tiempo,  Main.datosx);
 		Main.grafica.AgregarGraficas("datosy",  Main.tiempo,  Main.datosy);
 		Main.grafica.AgregarGraficas("datost",  Main.tiempo,  Main.datost);
+		
+		
+		
+		
+
 		
 		
 		

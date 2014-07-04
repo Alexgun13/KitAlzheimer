@@ -2,12 +2,20 @@ package alzheimer;
 
 import java.util.ArrayList;
 
+
 public class ArrayLista {
 	
-	ArrayList<CheckLista> DatosList = new ArrayList<CheckLista>();
-
- 
-	public void AgregaDato(CheckLista checklista){
+	static ArrayList<CheckLista> DatosList = new ArrayList<CheckLista>();
+	
+	public int getSize() {
+	return DatosList.size();
+	}
+	
+	public Object getElementAt(int i) {
+		return DatosList.get(i);
+		}
+	
+	public static void AgregaDato(CheckLista checklista){
 		DatosList.add(checklista);
 	}
 	

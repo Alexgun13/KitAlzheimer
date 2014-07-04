@@ -3,11 +3,13 @@ package alzheimer;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 
 import java.awt.Font;
@@ -37,13 +39,25 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JProgressBar;
+import javax.swing.BoxLayout;
+
+import java.awt.FlowLayout;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+
+import java.awt.CardLayout;
+import javax.swing.JTable;
 
 public class Main extends JFrame {
 
-	private JPanel contentPane;
+	public JPanel contentPane, panelCajas;
+	public JScrollPane scrollPane;
 	public static Configuracion config;
 	public static chart grafica;
 	private JPanel grafic;
+	private DefaultListModel model;
 	public static double[] datosx= new double [20];
 	public static double[] datosy=new double[20];
 	public static double[] datost = new double [20];
@@ -55,6 +69,9 @@ public class Main extends JFrame {
 	public static double[] datos = new double[20];
 	public static double[] tiempo = new double[20];
 	public static IOIORecibe recibe;
+	public JCheckBox caja;
+	private static JTable table;
+	public DefaultTableModel miTableModel;
 	/**
 	 * Launch the application.
 	 */
@@ -62,6 +79,7 @@ public class Main extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					Main frame = new Main();
 					frame.setVisible(true);
 					recibe= new IOIORecibe();
@@ -113,14 +131,26 @@ public class Main extends JFrame {
 		contentPane.add(panel);
 		
 		JButton btnMesure = new JButton("Mesure");
+		btnMesure.setBounds(276, 13, 67, 23);
+		
 		btnMesure.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				IOIORecibe.reinicia = true;
-				numeroDato ++;
+
+				miTableModel = (DefaultTableModel) table.getModel();
+				Object nuevaFila[]= {Boolean.FALSE, "Dato" + (numeroDato+1)};
+			    miTableModel.addRow(nuevaFila);
+			    
+			    panelCajas.add(table);
+				
+				scrollPane.setViewportView(panelCajas);
+				
 				new Thread(new EjecucionesMedida()).start();
+				numeroDato ++;
+				
+				
 			}
 		});
-		btnMesure.setBounds(276, 13, 67, 23);
 		contentPane.add(btnMesure);
 		
 		grafica = new chart("Grafica", tipo);
@@ -128,15 +158,11 @@ public class Main extends JFrame {
 		grafic = grafica;
 		contentPane.add(grafic);
 		grafica.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		lista = new Lista();
-		JScrollPane panelList = new JScrollPane(lista);
-		panelList.setBounds(274, 64, 167, 425);
-		contentPane.add(panelList);
+	    
 		
 		tabla = new Tabla();
+		tabla.setBounds(451, 373, 399, 200);
 		JPanel PanelTable = tabla;
-		PanelTable.setBounds(451, 373, 399, 200);
 		contentPane.add(PanelTable);
 		
 		JCheckBox chcPlot = new JCheckBox("Plot");
@@ -153,33 +179,63 @@ public class Main extends JFrame {
 		
 
 		barraPlano = new JProgressBar();
-		barraPlano.setForeground(Color.BLUE);
 		barraPlano.setBounds(276, 38, 146, 27);
+		barraPlano.setForeground(Color.BLUE);
 		contentPane.add(barraPlano);
 		barraPlano.setMaximum(20);
 		barraPlano.setStringPainted(true);
 		
 		JButton btnEncenderIoio = new JButton("Encender");
+		btnEncenderIoio.setBounds(5, 494, 89, 23);
 		btnEncenderIoio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				recibe.stop();
 				recibe.start();
 			}
 		});
-		btnEncenderIoio.setBounds(5, 494, 89, 23);
 		contentPane.add(btnEncenderIoio);
 		
 		JButton btnApagar = new JButton("Apagar");
+		btnApagar.setBounds(5, 522, 89, 23);
 		btnApagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				recibe.stop();
 			}
 		});
-		btnApagar.setBounds(5, 522, 89, 23);
 		contentPane.add(btnApagar);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(280, 69, 161, 361);
+		contentPane.add(scrollPane);
+		
+		panelCajas = new JPanel();
+		scrollPane.setViewportView(panelCajas);
+		
+		table = new JTable();
+		DefaultTableModel miTableModel = (DefaultTableModel) table.getModel();
+	    miTableModel.addColumn("Select");
+		miTableModel.addColumn("Mesures");
+		table = new JTable(miTableModel){
+		    	Class[] columnTypes = new Class[] {
+						Boolean.class, Object.class
+					};
+					public Class getColumnClass(int columnIndex) {
+						return columnTypes[columnIndex];
+					}
+		    };
+		panelCajas.add(table);
+		
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		
 		
 		
 	}
-
-	
 		}
