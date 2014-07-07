@@ -48,30 +48,32 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import java.awt.CardLayout;
+
 import javax.swing.JTable;
 
 public class Main extends JFrame {
 
-	public JPanel contentPane, panelCajas;
+	public JPanel contentPane, grafic;
+	JScrollPane panelCajas;
+	public static JPanel PanelTable;
 	public JScrollPane scrollPane;
+	public static JScrollPane scrollMedidas;
 	public static Configuracion config;
 	public static chart grafica;
-	private JPanel grafic;
-	private DefaultListModel model;
 	public static double[] datosx= new double [20];
 	public static double[] datosy=new double[20];
 	public static double[] datost = new double [20];
 	static JProgressBar barraPlano;
 	private static int tipo=1;
-	public static Lista lista;
-	public static Tabla tabla;
+	public static TablaMedidas tablaMedidas;
 	public static int numeroDato = 0;
 	public static double[] datos = new double[20];
 	public static double[] tiempo = new double[20];
 	public static IOIORecibe recibe;
 	public JCheckBox caja;
-	private static JTable table;
-	public DefaultTableModel miTableModel;
+	public static CheckLista tablaDatos;
+	public static botonTable botontable;
+		
 	/**
 	 * Launch the application.
 	 */
@@ -137,11 +139,9 @@ public class Main extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				IOIORecibe.reinicia = true;
 
-				miTableModel = (DefaultTableModel) table.getModel();
-				Object nuevaFila[]= {Boolean.FALSE, "Dato" + (numeroDato+1)};
-			    miTableModel.addRow(nuevaFila);
-			   
-				scrollPane.setViewportView(panelCajas);
+				CheckLista.AgregaFila(Boolean.FALSE, "Dato"+(numeroDato+1));
+				
+				scrollPane.setViewportView(CheckLista.TablaDatos);
 				
 				new Thread(new EjecucionesMedida()).start();
 				numeroDato ++;
@@ -158,10 +158,17 @@ public class Main extends JFrame {
 		grafica.setLayout(new GridLayout(1, 0, 0, 0));
 	    
 		
-		tabla = new Tabla();
-		tabla.setBounds(451, 373, 399, 200);
-		JPanel PanelTable = tabla;
-		contentPane.add(PanelTable);
+		
+		scrollMedidas = new JScrollPane();
+		scrollMedidas.setBounds(453, 373, 399, 200);
+		contentPane.add(scrollMedidas);
+		
+		tablaMedidas = new TablaMedidas();
+		TablaMedidas.tablaMedidas = new JTable();
+		TablaMedidas.nuevaTabla();
+		scrollMedidas.setViewportView(TablaMedidas.tablaMedidas);
+		
+		
 		
 		JCheckBox chcPlot = new JCheckBox("Plot");
 		chcPlot.setBounds(275, 494, 43, 23);
@@ -174,6 +181,8 @@ public class Main extends JFrame {
 		JCheckBox chcTable = new JCheckBox("Table");
 		chcTable.setBounds(275, 550, 51, 23);
 		contentPane.add(chcTable);
+		
+	
 		
 
 		barraPlano = new JProgressBar();
@@ -206,29 +215,14 @@ public class Main extends JFrame {
 		scrollPane.setBounds(280, 69, 161, 361);
 		contentPane.add(scrollPane);
 		
-		panelCajas = new JPanel();
-		scrollPane.setViewportView(panelCajas);
+		tablaDatos = new CheckLista();
+		CheckLista.TablaDatos = new JTable();
+		CheckLista.nuevaTabla();
+		scrollPane.setViewportView(CheckLista.TablaDatos);
 		
-		table = new JTable();
-		DefaultTableModel miTableModel = (DefaultTableModel) table.getModel();
-	    miTableModel.addColumn("Select");
-		miTableModel.addColumn("Mesures");
-		table = new JTable(miTableModel){
-		    	Class[] columnTypes = new Class[] {
-						Boolean.class, Object.class
-					};
-					public Class getColumnClass(int columnIndex) {
-						return columnTypes[columnIndex];
-					}
-					boolean[] columnEditables = new boolean[] {
-							true, false
-						};
-						public boolean isCellEditable(int row, int column) {
-							return columnEditables[column];
-						}
-		    };
-		table.setShowGrid(false);
-		panelCajas.add(table);
+
+		
+		
 		
 		
 		
