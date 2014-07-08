@@ -65,9 +65,9 @@ public class TablaMedidas extends JPanel {
 		columna4.setMinWidth(85);
 		
 	}
-	public static void AgregaDato(String medida, double freq, double u1, double u2, double u3, double u4, double xr, double yr, double zr, double phr, double xc, double yc, double zc, double phc){
-		miTableModel = (DefaultTableModel) tablaMedidas.getModel();
-		Object nuevaFila[]= {medida, freq, u1, u2, u3, u4, xr, yr, zr, phr, xc, yc, zc, phc};
+	public static void AgregaDato(double[] vector){
+			miTableModel = (DefaultTableModel) tablaMedidas.getModel();
+		Object nuevaFila[]= {vector[0], vector[1], vector[2], vector[3], vector[4], vector[5], vector[6], vector[7], vector[8], vector[9], vector[10], vector[11], vector[12]};
 	    miTableModel.addRow(nuevaFila);
 	}
 	

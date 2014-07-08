@@ -15,6 +15,8 @@ import javax.swing.BoxLayout;
 
 import java.awt.Panel;
 import java.awt.event.MouseEvent;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class CheckLista{
 	
@@ -22,6 +24,8 @@ public class CheckLista{
 	static DefaultTableModel miTableModel;
 	static JScrollPane panel;
 	public static String nombre;
+	public static double[] ArrayDoub;
+	public static int row, column;
 
 	/**
 	 * Create the panel.
@@ -97,12 +101,16 @@ public class CheckLista{
     private static void tblEjemploMouseClicked(java.awt.event.MouseEvent evt) {
 
  
-        int row = TablaDatos.rowAtPoint(evt.getPoint());
-        int column = TablaDatos.columnAtPoint(evt.getPoint());
+    	row = TablaDatos.rowAtPoint(evt.getPoint());
+        column = TablaDatos.columnAtPoint(evt.getPoint());
         if (row >= 0 && TablaDatos.isEnabled())
-        {
-        	nombre = (String)miTableModel.getValueAt(row,column);
-        	botonTable.botonTable();
+        {if (EjecucionesMedida.DONE==true){
+    	   
+        	nombre = (String) TablaDatos.getValueAt(row, column);
+        	Main.dato.setText(nombre);
+        	Tablea.Tablea();
+        	
+        	}
             }
         
     }

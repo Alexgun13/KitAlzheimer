@@ -48,12 +48,14 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
 
 import javax.swing.JTable;
 
 public class Main extends JFrame {
 
 	public JPanel contentPane, grafic;
+	public static JLabel dato;
 	JScrollPane panelCajas;
 	public static JPanel PanelTable;
 	public JScrollPane scrollPane;
@@ -72,7 +74,8 @@ public class Main extends JFrame {
 	public static IOIORecibe recibe;
 	public JCheckBox caja;
 	public static CheckLista tablaDatos;
-	public static botonTable botontable;
+	
+	
 		
 	/**
 	 * Launch the application.
@@ -137,13 +140,17 @@ public class Main extends JFrame {
 		
 		btnMesure.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				IOIORecibe.reinicia = true;
 
 				CheckLista.AgregaFila(Boolean.FALSE, "Dato"+(numeroDato+1));
 				
+				new Thread(new EjecucionesMedida()).start();
+				
+				CompletaArrayLista.CompletaArray();
+				
 				scrollPane.setViewportView(CheckLista.TablaDatos);
 				
-				new Thread(new EjecucionesMedida()).start();
 				numeroDato ++;
 				
 				
@@ -219,6 +226,10 @@ public class Main extends JFrame {
 		CheckLista.TablaDatos = new JTable();
 		CheckLista.nuevaTabla();
 		scrollPane.setViewportView(CheckLista.TablaDatos);
+		
+		dato = new JLabel(CheckLista.nombre);
+		dato.setBounds(638, 584, 46, 14);
+		contentPane.add(dato);
 		
 
 		
